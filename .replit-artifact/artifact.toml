@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/proximo-de-mim/"
+title = "Perto de Mim"
+version = "1.0.0"
+id = "artifacts/proximo-de-mim"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/proximo-de-mim/" ]
+localPort = 19665
+
+[services.development]
+run = "pnpm --filter @workspace/proximo-de-mim run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/proximo-de-mim", "run", "build" ]
+publicDir = "artifacts/proximo-de-mim/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "19665"
+BASE_PATH = "/proximo-de-mim/"
